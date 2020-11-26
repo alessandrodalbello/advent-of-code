@@ -3,6 +3,8 @@ package org.adb.adventofcode.io;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.function.Function;
+
 import org.junit.jupiter.api.Test;
 
 class FileResourceReaderTest {
@@ -69,30 +71,59 @@ class FileResourceReaderTest {
     @Test
     void nextIntArray() {
         try (FileResourceReader unit = new FileResourceReader(NUMBERS_TEST_FILENAME)) {
-            assertArrayEquals(new int[] { 42, 73, 1337 }, unit.nextIntArray(3));
+            assertArrayEquals(new int[]{42, 73, 1337}, unit.nextIntArray(3));
         }
     }
 
     @Test
     void nextLongArray() {
         try (FileResourceReader unit = new FileResourceReader(NUMBERS_TEST_FILENAME)) {
-            assertArrayEquals(new long[] { 42L, 73L, 1337L }, unit.nextLongArray(3));
+            assertArrayEquals(new long[]{42L, 73L, 1337L}, unit.nextLongArray(3));
         }
     }
 
     @Test
     void nextDoubleArray() {
         try (FileResourceReader unit = new FileResourceReader(NUMBERS_TEST_FILENAME)) {
-            assertArrayEquals(new double[] { 42d, 73d, 1337d }, unit.nextDoubleArray(3));
-            assertArrayEquals(new double[] { 16.08d, 19.7d, 248d }, unit.nextDoubleArray(3));
+            assertArrayEquals(new double[]{42d, 73d, 1337d}, unit.nextDoubleArray(3));
+            assertArrayEquals(new double[]{16.08d, 19.7d, 248d}, unit.nextDoubleArray(3));
         }
     }
 
     @Test
     void nextCharArray() {
         try (FileResourceReader unit = new FileResourceReader(STRINGS_TEST_FILENAME)) {
-            assertArrayEquals(new char[] { 'T', 'i', 'a', 't' }, unit.nextCharArray(4));
-            assertArrayEquals(new char[] { 'a', 'b', 'c' }, unit.nextCharArray(3));
+            assertArrayEquals(new char[]{'T', 'i', 'a', 't'}, unit.nextCharArray(4));
+            assertArrayEquals(new char[]{'a', 'b', 'c'}, unit.nextCharArray(3));
+        }
+    }
+
+    @Test
+    void asIntStream() {
+        try (FileResourceReader unit = new FileResourceReader(NUMBERS_TEST_FILENAME)) {
+            assertArrayEquals(new int[]{42, 73, 1337}, unit.asIntStream().toArray());
+        }
+    }
+
+    @Test
+    void asLongStream() {
+        try (FileResourceReader unit = new FileResourceReader(NUMBERS_TEST_FILENAME)) {
+            assertArrayEquals(new long[]{42L, 73L, 1337L}, unit.asLongStream().toArray());
+        }
+    }
+
+    @Test
+    void asDoubleStream() {
+        try (FileResourceReader unit = new FileResourceReader(NUMBERS_TEST_FILENAME)) {
+            assertArrayEquals(new double[]{42d, 73d, 1337d, 16.08d, 19.7d, 248d}, unit.asDoubleStream().toArray());
+        }
+    }
+
+    @Test
+    void asStream() {
+        try (FileResourceReader unit = new FileResourceReader(STRINGS_TEST_FILENAME)) {
+            assertArrayEquals(new Object[]{"This", "is", "a", "test!", "a", "b", "c"},
+                    unit.asStream(Function.identity()).toArray(Object[]::new));
         }
     }
 
