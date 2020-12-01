@@ -7,11 +7,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.StringTokenizer;
-import java.util.function.Function;
-import java.util.stream.DoubleStream;
-import java.util.stream.IntStream;
-import java.util.stream.LongStream;
-import java.util.stream.Stream;
 
 abstract class FastReader implements Closeable {
 
@@ -83,60 +78,7 @@ abstract class FastReader implements Closeable {
         }
     }
 
-    public IntStream asIntStream() {
-        IntStream.Builder streamBuilder = IntStream.builder();
-        boolean hasNext = true;
-        while (hasNext) {
-            try {
-                streamBuilder.accept(nextInt());
-            } catch (RuntimeException e) {
-                hasNext = false;
-            }
-        }
-        return streamBuilder.build();
-    }
-
-    public LongStream asLongStream() {
-        LongStream.Builder streamBuilder = LongStream.builder();
-        boolean hasNext = true;
-        while (hasNext) {
-            try {
-                streamBuilder.accept(nextLong());
-            } catch (RuntimeException e) {
-                hasNext = false;
-            }
-        }
-        return streamBuilder.build();
-    }
-
-    public DoubleStream asDoubleStream() {
-        DoubleStream.Builder streamBuilder = DoubleStream.builder();
-        boolean hasNext = true;
-        while (hasNext) {
-            try {
-                streamBuilder.accept(nextDouble());
-            } catch (RuntimeException e) {
-                hasNext = false;
-            }
-        }
-        return streamBuilder.build();
-    }
-
-    public <T> Stream<? super T> asStream(Function<String, ? extends T> converter) {
-        Stream.Builder<T> streamBuilder = Stream.builder();
-        boolean hasNext = true;
-        while (hasNext) {
-            try {
-                T element = converter.apply(next());
-                streamBuilder.accept(element);
-            } catch (RuntimeException e) {
-                hasNext = false;
-            }
-        }
-        return streamBuilder.build();
-    }
-
-    private String next() {
+    protected String next() {
         while (stringTokenizer == null || !stringTokenizer.hasMoreElements()) {
             try {
                 stringTokenizer = new StringTokenizer(bufferedReader.readLine());
