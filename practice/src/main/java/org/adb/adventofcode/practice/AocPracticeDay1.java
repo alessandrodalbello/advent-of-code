@@ -1,10 +1,10 @@
-package org.adb.adventofcode.practice.day1;
+package org.adb.adventofcode.practice;
 
 import org.adb.adventofcode.io.FileResourceReader;
 
 public class AocPracticeDay1 {
 
-    private static final String INPUT_FILENAME = "aoc_in1.txt";
+    private static final String INPUT_FILENAME = "aoc_practice.txt";
 
     public static void main(String[] args) {
         AocPracticeDay1.solvePart1();
