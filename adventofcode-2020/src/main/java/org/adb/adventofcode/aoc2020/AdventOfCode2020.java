@@ -9,7 +9,7 @@ public class AdventOfCode2020 {
     public static void main(String[] args) {
         System.out.println("--- AoC 2020 ---");
         long tStart = System.nanoTime();
-        Solver solver = new Day1();
+        Solver solver = new Day2();
         long tInput = System.nanoTime();
         System.out.printf("Solver loaded in %d ms.%n", nanosToMillis(tInput - tStart));
 
