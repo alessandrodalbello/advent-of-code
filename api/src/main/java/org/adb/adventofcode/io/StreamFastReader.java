@@ -13,6 +13,24 @@ abstract class StreamFastReader extends FastReader {
         super(inputStream);
     }
 
+    public Stream<String> asLines() {
+        Stream.Builder<String> streamBuilder = Stream.builder();
+        boolean hasNext = true;
+        while (hasNext) {
+            try {
+                String line = nextLine();
+                if (line != null) {
+                    streamBuilder.accept(line);
+                } else {
+                    hasNext = false;
+                }
+            } catch (RuntimeException e) {
+                hasNext = false;
+            }
+        }
+        return streamBuilder.build();
+    }
+
     public IntStream asIntStream() {
         IntStream.Builder streamBuilder = IntStream.builder();
         boolean hasNext = true;
@@ -52,12 +70,26 @@ abstract class StreamFastReader extends FastReader {
         return streamBuilder.build();
     }
 
-    public <T> Stream<? super T> asStream(Function<String, ? extends T> converter) {
+    public <T> Stream<T> asStream(Function<String, ? extends T> converter) {
         Stream.Builder<T> streamBuilder = Stream.builder();
         boolean hasNext = true;
         while (hasNext) {
             try {
                 T element = converter.apply(next());
+                streamBuilder.accept(element);
+            } catch (RuntimeException e) {
+                hasNext = false;
+            }
+        }
+        return streamBuilder.build();
+    }
+
+    public <T> Stream<T> parseAsStream(Function<? super FastReader, ? extends T> parser) {
+        Stream.Builder<T> streamBuilder = Stream.builder();
+        boolean hasNext = true;
+        while (hasNext) {
+            try {
+                T element = parser.apply(this);
                 streamBuilder.accept(element);
             } catch (RuntimeException e) {
                 hasNext = false;
