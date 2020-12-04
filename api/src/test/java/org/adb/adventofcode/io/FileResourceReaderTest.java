@@ -187,12 +187,4 @@ class FileResourceReaderTest {
                     unit.asStream(Function.identity()).toArray(Object[]::new));
         }
     }
-
-    @Test
-    void parseAsStream() {
-        try (FileResourceReader unit = new FileResourceReader(NUMBERS_TEST_FILENAME)) {
-            assertArrayEquals(new Object[]{new double[]{42d, 73d, 1337d}, new double[]{16.08d, 19.7d, 248d}},
-                    unit.parseAsStream(reader -> reader.nextDoubleArray(3)).toArray(Object[]::new));
-        }
-    }
 }

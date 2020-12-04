@@ -1,10 +1,12 @@
 package org.adb.adventofcode.aoc2020;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.adb.adventofcode.Solver;
 import org.adb.adventofcode.io.FileResourceReader;
+import org.adb.adventofcode.io.StringReader;
 
 class Day2 implements Solver {
 
@@ -13,13 +15,23 @@ class Day2 implements Solver {
     private final List<PasswordPolicy> passwordPolicies;
 
     public Day2() {
+        passwordPolicies = new LinkedList<>();
+
         try (FileResourceReader reader = new FileResourceReader(INPUT_FILENAME)) {
-            passwordPolicies = reader.parseAsStream(fastReader -> {
-                int[] policy = fastReader.nextIntSplit("-");
-                char target = fastReader.nextChar();
-                String password = fastReader.nextString();
-                return new PasswordPolicy(policy, target, password);
-            }).collect(Collectors.toList());
+            List<String> rawData = reader.asLines().collect(Collectors.toList());
+            for (String rawPolicy : rawData) {
+                PasswordPolicy passwordPolicy = parsePolicy(rawPolicy);
+                passwordPolicies.add(passwordPolicy);
+            }
+        }
+    }
+
+    private PasswordPolicy parsePolicy(String rawPolicy) {
+        try (StringReader policyReader = new StringReader(rawPolicy)) {
+            int[] policy = policyReader.nextIntSplit("-");
+            char target = policyReader.nextChar();
+            String password = policyReader.nextString();
+            return new PasswordPolicy(policy, target, password);
         }
     }
 

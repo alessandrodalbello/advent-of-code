@@ -100,18 +100,4 @@ abstract class StreamFastReader extends FastReader {
         }
         return streamBuilder.build();
     }
-
-    public <T> Stream<T> parseAsStream(Function<? super FastReader, ? extends T> parser) {
-        Stream.Builder<T> streamBuilder = Stream.builder();
-        boolean hasNext = true;
-        while (hasNext) {
-            try {
-                T element = parser.apply(this);
-                streamBuilder.accept(element);
-            } catch (RuntimeException e) {
-                hasNext = false;
-            }
-        }
-        return streamBuilder.build();
-    }
 }

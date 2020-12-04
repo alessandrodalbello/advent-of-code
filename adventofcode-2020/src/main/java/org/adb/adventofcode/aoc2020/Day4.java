@@ -28,8 +28,8 @@ class Day4 implements Solver {
     }
 
     private Passport parsePassport(String rawPassport) {
-        final Passport passport = new Passport();
         try (StringReader passportReader = new StringReader(rawPassport)) {
+            final Passport passport = new Passport();
             boolean hasNext = true;
             while (hasNext) {
                 try {
@@ -39,8 +39,8 @@ class Day4 implements Solver {
                     hasNext = false;
                 }
             }
+            return passport;
         }
-        return passport;
     }
 
     private void assignPassportKey(Passport passport, String[] keyValue) {
