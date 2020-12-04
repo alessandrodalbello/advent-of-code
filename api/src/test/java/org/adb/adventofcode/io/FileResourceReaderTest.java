@@ -136,10 +136,26 @@ class FileResourceReaderTest {
     }
 
     @Test
+    void nextLine() {
+        try (FileResourceReader unit = new FileResourceReader(STRINGS_TEST_FILENAME)) {
+            assertEquals("This is a test!", unit.nextLine());
+            assertEquals("a b c", unit.nextLine());
+        }
+    }
+
+    @Test
     void asLines() {
         try (FileResourceReader unit = new FileResourceReader(STRINGS_TEST_FILENAME)) {
-            assertArrayEquals(new String[]{"This is a test!", "a b c"},
+            assertArrayEquals(new String[]{"This is a test!", "a b c", "", "Another line"},
                     unit.asLines().toArray(String[]::new));
+        }
+    }
+
+    @Test
+    void asMultilines() {
+        try (FileResourceReader unit = new FileResourceReader(STRINGS_TEST_FILENAME)) {
+            assertArrayEquals(new String[]{"This is a test!\na b c", "Another line"},
+                    unit.asMultilines().toArray(String[]::new));
         }
     }
 
@@ -167,7 +183,7 @@ class FileResourceReaderTest {
     @Test
     void asStream() {
         try (FileResourceReader unit = new FileResourceReader(STRINGS_TEST_FILENAME)) {
-            assertArrayEquals(new Object[]{"This", "is", "a", "test!", "a", "b", "c"},
+            assertArrayEquals(new Object[]{"This", "is", "a", "test!", "a", "b", "c", "Another", "line"},
                     unit.asStream(Function.identity()).toArray(Object[]::new));
         }
     }
@@ -177,14 +193,6 @@ class FileResourceReaderTest {
         try (FileResourceReader unit = new FileResourceReader(NUMBERS_TEST_FILENAME)) {
             assertArrayEquals(new Object[]{new double[]{42d, 73d, 1337d}, new double[]{16.08d, 19.7d, 248d}},
                     unit.parseAsStream(reader -> reader.nextDoubleArray(3)).toArray(Object[]::new));
-        }
-    }
-
-    @Test
-    void nextLine() {
-        try (FileResourceReader unit = new FileResourceReader(STRINGS_TEST_FILENAME)) {
-            assertEquals("This is a test!", unit.nextLine());
-            assertEquals("a b c", unit.nextLine());
         }
     }
 }

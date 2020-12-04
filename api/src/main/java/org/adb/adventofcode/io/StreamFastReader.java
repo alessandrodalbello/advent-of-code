@@ -17,14 +17,31 @@ abstract class StreamFastReader extends FastReader {
         Stream.Builder<String> streamBuilder = Stream.builder();
         boolean hasNext = true;
         while (hasNext) {
-            try {
-                String line = nextLine();
-                if (line != null) {
-                    streamBuilder.accept(line);
+            String line = nextLine();
+            if (line != null) {
+                streamBuilder.accept(line);
+            } else {
+                hasNext = false;
+            }
+        }
+        return streamBuilder.build();
+    }
+
+    public Stream<String> asMultilines() {
+        Stream.Builder<String> streamBuilder = Stream.builder();
+        boolean hasNext = true;
+        StringBuilder multiline = new StringBuilder();
+        while (hasNext) {
+            String line = nextLine();
+            if (line != null) {
+                if (!line.isEmpty()) {
+                    multiline.append(line).append('\n');
                 } else {
-                    hasNext = false;
+                    streamBuilder.accept(multiline.substring(0, multiline.length() - 1));
+                    multiline.setLength(0);
                 }
-            } catch (RuntimeException e) {
+            } else {
+                streamBuilder.accept(multiline.substring(0, multiline.length() - 1));
                 hasNext = false;
             }
         }
