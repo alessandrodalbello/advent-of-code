@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.adb.adventofcode.Solver;
 import org.adb.adventofcode.io.FileResourceReader;
+import org.adb.adventofcode.io.StringReader;
 
 class Day4 implements Solver {
 
@@ -18,17 +19,56 @@ class Day4 implements Solver {
         passports = new LinkedList<>();
 
         try (FileResourceReader reader = new FileResourceReader(INPUT_FILENAME)) {
-            List<String> lines = reader.asLines().collect(Collectors.toList());
-            StringBuilder rawPassport = new StringBuilder();
-            for (String line : lines) {
-                if (line.isEmpty()) {
-                    Passport passport = Passport.parse(rawPassport.substring(1));
-                    passports.add(passport);
-                    rawPassport.setLength(0);
-                } else {
-                    rawPassport.append(" ").append(line);
+            List<String> rawData = reader.asMultilines().collect(Collectors.toList());
+            for (String rawPassport : rawData) {
+                Passport passport = parsePassport(rawPassport);
+                passports.add(passport);
+            }
+        }
+    }
+
+    private Passport parsePassport(String rawPassport) {
+        final Passport passport = new Passport();
+        try (StringReader passportReader = new StringReader(rawPassport)) {
+            boolean hasNext = true;
+            while (hasNext) {
+                try {
+                    String[] keyValue = passportReader.nextSplit(":");
+                    assignPassportKey(passport, keyValue);
+                } catch (RuntimeException e) {
+                    hasNext = false;
                 }
             }
+        }
+        return passport;
+    }
+
+    private void assignPassportKey(Passport passport, String[] keyValue) {
+        String tokenKey = keyValue[0];
+        String tokenValue = keyValue[1];
+        if (tokenKey.equals("byr")) {
+            passport.birthYear = parseNumber(tokenValue);
+        } else if (tokenKey.equals("iyr")) {
+            passport.issueYear = parseNumber(tokenValue);
+        } else if (tokenKey.equals("eyr")) {
+            passport.expirationYear = parseNumber(tokenValue);
+        } else if (tokenKey.equals("pid")) {
+            passport.passportId = tokenValue;
+        } else if (tokenKey.equals("ecl")) {
+            passport.eyeColor = tokenValue;
+        } else if (tokenKey.equals("hcl")) {
+            passport.hairColor = tokenValue;
+        } else if (tokenKey.equals("hgt")) {
+            passport.height = parseNumber(tokenValue.substring(0, tokenValue.length() - 2));
+            passport.heightUnit = tokenValue.substring(tokenValue.length() - 2);
+        }
+    }
+
+    private int parseNumber(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            return -1;
         }
     }
 
@@ -62,39 +102,6 @@ class Day4 implements Solver {
         private String hairColor;
         private String eyeColor;
         private String heightUnit;
-
-        private static Passport parse(String rawPassport) {
-            String[] tokens = rawPassport.split("\\s");
-            final Passport passport = new Passport();
-            for (String token : tokens) {
-                String tokenValue = token.substring(4);
-                if (token.startsWith("byr:")) {
-                    passport.birthYear = Passport.parseNumber(tokenValue);
-                } else if (token.startsWith("iyr:")) {
-                    passport.issueYear = Passport.parseNumber(tokenValue);
-                } else if (token.startsWith("eyr:")) {
-                    passport.expirationYear = Passport.parseNumber(tokenValue);
-                } else if (token.startsWith("pid:")) {
-                    passport.passportId = tokenValue;
-                } else if (token.startsWith("ecl:")) {
-                    passport.eyeColor = tokenValue;
-                } else if (token.startsWith("hcl:")) {
-                    passport.hairColor = tokenValue;
-                } else if (token.startsWith("hgt:")) {
-                    passport.height = Passport.parseNumber(tokenValue.substring(0, tokenValue.length() - 2));
-                    passport.heightUnit = tokenValue.substring(tokenValue.length() - 2);
-                }
-            }
-            return passport;
-        }
-
-        private static int parseNumber(String number) {
-            try {
-                return Integer.parseInt(number);
-            } catch (NumberFormatException e) {
-                return -1;
-            }
-        }
 
         private boolean isValidByNumberOfFields() {
             return (birthYear > 0 || birthYear == -1)
