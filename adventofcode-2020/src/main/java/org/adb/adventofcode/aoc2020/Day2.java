@@ -1,6 +1,5 @@
 package org.adb.adventofcode.aoc2020;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,14 +14,8 @@ class Day2 implements Solver {
     private final List<PasswordPolicy> passwordPolicies;
 
     public Day2() {
-        passwordPolicies = new LinkedList<>();
-
         try (FileResourceReader reader = new FileResourceReader(INPUT_FILENAME)) {
-            List<String> rawData = reader.asLines().collect(Collectors.toList());
-            for (String rawPolicy : rawData) {
-                PasswordPolicy passwordPolicy = parsePolicy(rawPolicy);
-                passwordPolicies.add(passwordPolicy);
-            }
+            passwordPolicies = reader.parseLines(this::parsePolicy).collect(Collectors.toList());
         }
     }
 
@@ -38,17 +31,33 @@ class Day2 implements Solver {
     @Override
     public void solveSilver() {
         long valid = passwordPolicies.stream()
-                .filter(PasswordPolicy::isValidByFrequency)
+                .filter(this::isPolicyValidByFrequency)
                 .count();
         System.out.printf("There are %d valid passwords by frequency of target char.%n", valid);
+    }
+
+    private boolean isPolicyValidByFrequency(PasswordPolicy passwordPolicy) {
+        long count = passwordPolicy.password.chars()
+                .filter(c -> c == passwordPolicy.targetChar)
+                .count();
+        return count >= passwordPolicy.policy[0] && count <= passwordPolicy.policy[1];
     }
 
     @Override
     public void solveGold() {
         long valid = passwordPolicies.stream()
-                .filter(PasswordPolicy::isValidByIndex)
+                .filter(this::isPolicyValidByIndex)
                 .count();
         System.out.printf("There are %d valid passwords by index positions of target char.%n", valid);
+    }
+
+    private boolean isPolicyValidByIndex(PasswordPolicy passwordPolicy) {
+        String password = passwordPolicy.password;
+        int i = passwordPolicy.policy[0] - 1;
+        boolean matchMin = i < password.length() && password.charAt(i) == passwordPolicy.targetChar;
+        int j = passwordPolicy.policy[1] - 1;
+        boolean matchMax = j < password.length() && password.charAt(j) == passwordPolicy.targetChar;
+        return matchMin && !matchMax || !matchMin && matchMax;
     }
 
     private static class PasswordPolicy {
@@ -60,21 +69,6 @@ class Day2 implements Solver {
             this.policy = policy;
             this.targetChar = targetChar;
             this.password = password;
-        }
-
-        private boolean isValidByFrequency() {
-            long count = password.chars()
-                    .filter(c -> c == targetChar)
-                    .count();
-            return count >= policy[0] && count <= policy[1];
-        }
-
-        private boolean isValidByIndex() {
-            int i = policy[0] - 1;
-            boolean matchMin = i < password.length() && password.charAt(i) == targetChar;
-            int j = policy[1] - 1;
-            boolean matchMax = j < password.length() && password.charAt(j) == targetChar;
-            return matchMin && !matchMax || !matchMin && matchMax;
         }
     }
 }

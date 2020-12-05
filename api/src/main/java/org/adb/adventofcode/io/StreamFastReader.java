@@ -13,41 +13,6 @@ abstract class StreamFastReader extends FastReader {
         super(inputStream);
     }
 
-    public Stream<String> asLines() {
-        Stream.Builder<String> streamBuilder = Stream.builder();
-        boolean hasNext = true;
-        while (hasNext) {
-            String line = nextLine();
-            if (line != null) {
-                streamBuilder.accept(line);
-            } else {
-                hasNext = false;
-            }
-        }
-        return streamBuilder.build();
-    }
-
-    public Stream<String> asMultilines() {
-        Stream.Builder<String> streamBuilder = Stream.builder();
-        boolean hasNext = true;
-        StringBuilder multiline = new StringBuilder();
-        while (hasNext) {
-            String line = nextLine();
-            if (line != null) {
-                if (!line.isEmpty()) {
-                    multiline.append(line).append('\n');
-                } else {
-                    streamBuilder.accept(multiline.substring(0, multiline.length() - 1));
-                    multiline.setLength(0);
-                }
-            } else {
-                streamBuilder.accept(multiline.substring(0, multiline.length() - 1));
-                hasNext = false;
-            }
-        }
-        return streamBuilder.build();
-    }
-
     public IntStream asIntStream() {
         IntStream.Builder streamBuilder = IntStream.builder();
         boolean hasNext = true;
@@ -99,5 +64,48 @@ abstract class StreamFastReader extends FastReader {
             }
         }
         return streamBuilder.build();
+    }
+
+    public Stream<String> asLines() {
+        Stream.Builder<String> streamBuilder = Stream.builder();
+        boolean hasNext = true;
+        while (hasNext) {
+            String line = nextLine();
+            if (line != null) {
+                streamBuilder.accept(line);
+            } else {
+                hasNext = false;
+            }
+        }
+        return streamBuilder.build();
+    }
+
+    public <T> Stream<T> parseLines(Function<String, ? extends T> converter) {
+        return asLines().map(converter);
+    }
+
+    public Stream<String> asMultilines() {
+        Stream.Builder<String> streamBuilder = Stream.builder();
+        boolean hasNext = true;
+        StringBuilder multiline = new StringBuilder();
+        while (hasNext) {
+            String line = nextLine();
+            if (line != null) {
+                if (!line.isEmpty()) {
+                    multiline.append(line).append('\n');
+                } else {
+                    streamBuilder.accept(multiline.substring(0, multiline.length() - 1));
+                    multiline.setLength(0);
+                }
+            } else {
+                streamBuilder.accept(multiline.substring(0, multiline.length() - 1));
+                hasNext = false;
+            }
+        }
+        return streamBuilder.build();
+    }
+
+    public <T> Stream<T> parseMultilines(Function<String, ? extends T> converter) {
+        return asMultilines().map(converter);
     }
 }

@@ -144,22 +144,6 @@ class FileResourceReaderTest {
     }
 
     @Test
-    void asLines() {
-        try (FileResourceReader unit = new FileResourceReader(STRINGS_TEST_FILENAME)) {
-            assertArrayEquals(new String[]{"This is a test!", "a b c", "", "Another line"},
-                    unit.asLines().toArray(String[]::new));
-        }
-    }
-
-    @Test
-    void asMultilines() {
-        try (FileResourceReader unit = new FileResourceReader(STRINGS_TEST_FILENAME)) {
-            assertArrayEquals(new String[]{"This is a test!\na b c", "Another line"},
-                    unit.asMultilines().toArray(String[]::new));
-        }
-    }
-
-    @Test
     void asIntStream() {
         try (FileResourceReader unit = new FileResourceReader(NUMBERS_TEST_FILENAME)) {
             assertArrayEquals(new int[]{42, 73, 1337}, unit.asIntStream().toArray());
@@ -185,6 +169,38 @@ class FileResourceReaderTest {
         try (FileResourceReader unit = new FileResourceReader(STRINGS_TEST_FILENAME)) {
             assertArrayEquals(new Object[]{"This", "is", "a", "test!", "a", "b", "c", "Another", "line"},
                     unit.asStream(Function.identity()).toArray(Object[]::new));
+        }
+    }
+
+    @Test
+    void asLines() {
+        try (FileResourceReader unit = new FileResourceReader(STRINGS_TEST_FILENAME)) {
+            assertArrayEquals(new String[]{"This is a test!", "a b c", "", "Another line"},
+                    unit.asLines().toArray(String[]::new));
+        }
+    }
+
+    @Test
+    void parseLines() {
+        try (FileResourceReader unit = new FileResourceReader(STRINGS_TEST_FILENAME)) {
+            assertArrayEquals(new Integer[]{15, 5, 0, 12},
+                    unit.parseLines(String::length).toArray(Integer[]::new));
+        }
+    }
+
+    @Test
+    void asMultilines() {
+        try (FileResourceReader unit = new FileResourceReader(STRINGS_TEST_FILENAME)) {
+            assertArrayEquals(new String[]{"This is a test!\na b c", "Another line"},
+                    unit.asMultilines().toArray(String[]::new));
+        }
+    }
+
+    @Test
+    void parseMultilines() {
+        try (FileResourceReader unit = new FileResourceReader(STRINGS_TEST_FILENAME)) {
+            assertArrayEquals(new String[]{"Thi", "Ano"},
+                    unit.parseMultilines(s -> s.substring(0, 3)).toArray(String[]::new));
         }
     }
 }

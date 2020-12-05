@@ -1,8 +1,6 @@
 package org.adb.adventofcode.aoc2020;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.adb.adventofcode.Solver;
@@ -16,14 +14,8 @@ class Day4 implements Solver {
     private final List<Passport> passports;
 
     public Day4() {
-        passports = new LinkedList<>();
-
         try (FileResourceReader reader = new FileResourceReader(INPUT_FILENAME)) {
-            List<String> rawData = reader.asMultilines().collect(Collectors.toList());
-            for (String rawPassport : rawData) {
-                Passport passport = parsePassport(rawPassport);
-                passports.add(passport);
-            }
+            passports = reader.parseMultilines(this::parsePassport).collect(Collectors.toList());
         }
     }
 
@@ -75,25 +67,47 @@ class Day4 implements Solver {
     @Override
     public void solveSilver() {
         long valid = passports.stream()
-                .filter(Passport::isValidByNumberOfFields)
+                .filter(this::isValidPassportByNumberOfFields)
                 .count();
         System.out.printf("There are %d passports with the correct number of fields.%n", valid);
+    }
+
+    private boolean isValidPassportByNumberOfFields(Passport passport) {
+        return (passport.birthYear > 0 || passport.birthYear == -1)
+                && (passport.issueYear > 0 || passport.issueYear == -1)
+                && (passport.expirationYear > 0 || passport.expirationYear == -1)
+                && (passport.height > 0 || passport.height == -1)
+                && passport.passportId != null && passport.hairColor != null && passport.eyeColor != null;
     }
 
     @Override
     public void solveGold() {
         long valid = passports.stream()
-                .filter(Passport::isValidByFieldConstraints)
+                .filter(this::isValidPassportByFieldConstraints)
                 .count();
         System.out.printf("There are %d passports with the correct number of valid fields.%n", valid);
     }
 
+    private boolean isValidPassportByFieldConstraints(Passport passport) {
+        return isValidRange(passport.birthYear, 1920, 2002)
+                && isValidRange(passport.issueYear, 2010, 2020)
+                && isValidRange(passport.expirationYear, 2020, 2030)
+                && isValidPatter(passport.passportId, "\\d{9}")
+                && isValidPatter(passport.hairColor, "#[\\da-f]{6}")
+                && isValidPatter(passport.eyeColor, "amb|blu|brn|gry|grn|hzl|oth")
+                && ("cm".equals(passport.heightUnit) && isValidRange(passport.height, 150, 193)
+                    || "in".equals(passport.heightUnit) && isValidRange(passport.height, 59, 76));
+    }
+
+    private boolean isValidRange(int value, int low, int high) {
+        return value >= low && value <= high;
+    }
+
+    private boolean isValidPatter(String value, String pattern) {
+        return value != null && value.matches(pattern);
+    }
+
     private static class Passport {
-
-        private static final Set<String> EYE_COLORS = Set.of("amb", "blu", "brn", "gry", "grn", "hzl", "oth");
-        private static final String HEIGHT_UNIT_CM = "cm";
-        private static final String HEIGHT_UNIT_IN = "in";
-
         private int birthYear;
         private int issueYear;
         private int expirationYear;
@@ -102,42 +116,5 @@ class Day4 implements Solver {
         private String hairColor;
         private String eyeColor;
         private String heightUnit;
-
-        private boolean isValidByNumberOfFields() {
-            return (birthYear > 0 || birthYear == -1)
-                    && (issueYear > 0 || issueYear == -1)
-                    && (expirationYear > 0 || expirationYear == -1)
-                    && (height > 0 || height == -1)
-                    && passportId != null && hairColor != null && eyeColor != null;
-        }
-
-        private boolean isValidByFieldConstraints() {
-            if (birthYear < 1920 || birthYear > 2002) {
-                return false;
-            }
-            if (issueYear < 2010 || issueYear > 2020) {
-                return false;
-            }
-            if (expirationYear < 2020 || expirationYear > 2030) {
-                return false;
-            }
-            if (passportId == null || !passportId.matches("\\d{9}")) {
-                return false;
-            }
-            if (hairColor == null || !hairColor.matches("#[\\da-f]{6}")) {
-                return false;
-            }
-            if (eyeColor == null || !EYE_COLORS.contains(eyeColor)) {
-                return false;
-            }
-            if (HEIGHT_UNIT_CM.equals(heightUnit)) {
-                return height >= 150 && height <= 193;
-            } else if (HEIGHT_UNIT_IN.equals(heightUnit)) {
-                return height >= 59 && height <= 76;
-            } else {
-                return false;
-            }
-        }
     }
-
 }
