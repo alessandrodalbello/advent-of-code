@@ -1,7 +1,6 @@
 package org.adb.adventofcode.aoc2020;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,23 +11,22 @@ class Day5 implements Solver {
 
     private static final String INPUT_FILENAME = "aoc_day5.txt";
 
-    private final List<Seat> seats;
+    private final List<Integer> seatIds;
 
     public Day5() {
         try (FileResourceReader reader = new FileResourceReader(INPUT_FILENAME)) {
-            seats = reader.asStream(this::parseSeat)
-                    .sorted(Comparator.comparingInt(s -> s.id))
+            seatIds = reader.asStream(this::parseSeat)
+                    .sorted()
                     .collect(Collectors.toList());
         }
     }
 
-    private Seat parseSeat(String boardingPass) {
+    private int parseSeat(String boardingPass) {
         char[] rowChars = Arrays.copyOfRange(boardingPass.toCharArray(), 0, 7);
         int row = binarySearchBoardingPass(rowChars, 'F');
         char[] colChars = Arrays.copyOfRange(boardingPass.toCharArray(), 7, 10);
         int col = binarySearchBoardingPass(colChars, 'L');
-        int id = row * 8 + col;
-        return new Seat(id);
+        return row * 8 + col;
     }
 
     private int binarySearchBoardingPass(char[] chars, char lowerChar) {
@@ -46,28 +44,20 @@ class Day5 implements Solver {
 
     @Override
     public void solveSilver() {
-        Seat lastSeat = seats.get(seats.size() - 1);
-        System.out.printf("The highest seat ID in the plane is %d.%n", lastSeat.id);
+        int lastSeatId = seatIds.get(seatIds.size() - 1);
+        System.out.printf("The highest seat ID in the plane is %d.%n", lastSeatId);
     }
 
     @Override
     public void solveGold() {
-        Seat seatAfterMissing = null;
+        int missingSeatId = -1;
         int i = 1;
-        while (seatAfterMissing == null) {
-            if (seats.get(i).id - seats.get(i - 1).id == 2) {
-                seatAfterMissing = seats.get(i);
+        while (missingSeatId < 0) {
+            if (seatIds.get(i) - seatIds.get(i - 1) == 2) {
+                missingSeatId = seatIds.get(i) - 1;
             }
             i += 1;
         }
-        System.out.printf("The missing seat ID is %d.%n", seatAfterMissing.id - 1);
-    }
-
-    private static class Seat {
-        private final int id;
-
-        private Seat(int id) {
-            this.id = id;
-        }
+        System.out.printf("The missing seat ID is %d.%n", missingSeatId);
     }
 }
