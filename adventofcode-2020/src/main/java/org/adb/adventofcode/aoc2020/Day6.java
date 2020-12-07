@@ -1,5 +1,6 @@
 package org.adb.adventofcode.aoc2020;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -14,25 +15,30 @@ class Day6 implements Solver {
 
     private static final String INPUT_FILENAME = "aoc_day6.txt";
 
-    private final List<String> answers;
+    private final List<GroupAnswers> answers;
 
     public Day6() {
         try (FileResourceReader reader = new FileResourceReader(INPUT_FILENAME)) {
-            answers = reader.asMultilines().collect(Collectors.toList());
+            answers = reader.parseMultilines(this::parseGroupAnswers).collect(Collectors.toList());
         }
+    }
+
+    private GroupAnswers parseGroupAnswers(String groupAnswers) {
+        List<String> answers = Arrays.stream(groupAnswers.split("\\n"))
+                .collect(Collectors.toList());
+        return new GroupAnswers(answers);
     }
 
     @Override
     public void solveSilver() {
         int totalAnswers = 0;
-        for (String groupAnswers : answers) {
+        for (GroupAnswers groupAnswers : answers) {
             Set<Integer> set = new HashSet<>();
-            for (int i = 0; i < groupAnswers.length(); i++) {
-                int c = groupAnswers.charAt(i);
-                if (c >= 'a' && c <= 'z') {
-                    set.add(c);
+            groupAnswers.answers.forEach(answer -> {
+                for (int i = 0; i < answer.length(); i++) {
+                    set.add((int) answer.charAt(i));
                 }
-            }
+            });
             totalAnswers += set.size();
         }
         System.out.printf("The sum of the answers in each group is %d.%n", totalAnswers);
@@ -41,19 +47,26 @@ class Day6 implements Solver {
     @Override
     public void solveGold() {
         int totalAnswers = 0;
-        for (String groupAnswers : answers) {
-            Map<Integer, Integer> map = new HashMap<>();
-            String[] personAnswers = groupAnswers.split("\\s");
-            for (String personAnswer : personAnswers) {
+        for (GroupAnswers groupAnswers : answers) {
+            Map<Integer, Integer> charFrequency = new HashMap<>();
+            for (String personAnswer : groupAnswers.answers) {
                 for (int i = 0; i < personAnswer.length(); i++) {
                     int c = personAnswer.charAt(i);
-                    map.merge(c, 1, Integer::sum);
+                    charFrequency.merge(c, 1, Integer::sum);
                 }
             }
-            totalAnswers += map.entrySet().stream()
-                    .filter(entry -> entry.getValue() == personAnswers.length)
+            totalAnswers += charFrequency.entrySet().stream()
+                    .filter(entry -> entry.getValue() == groupAnswers.answers.size())
                     .count();
         }
         System.out.printf("The sum of the shared answers in each group is %d.%n", totalAnswers);
+    }
+
+    private static class GroupAnswers {
+        private final List<String> answers;
+
+        private GroupAnswers(List<String> answers) {
+            this.answers = answers;
+        }
     }
 }
