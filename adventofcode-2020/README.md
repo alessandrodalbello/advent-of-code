@@ -12,6 +12,17 @@ To save your vacation, you need to get all fifty stars by December 25th.
 Collect stars by solving puzzles. Two puzzles will be made available on each day in the Advent calendar; the second
 puzzle is unlocked when you complete the first. Each puzzle grants one star. Good luck!
 
+## Index of days
+
+1. [Report Repair](#day-1-report-repair)
+2. [Password Philosophy](#day-2-password-philosophy)
+3. [Toboggan Trajectory](#day-3-toboggan-trajectory)
+4. [Passport Processing](#day-4-passport-processing)
+5. [Binary Boarding](#day-5-binary-boarding)
+6. [Custom Customs](#day-6-custom-customs)
+7. [Handy Haversacks](#day-7-handy-haversacks)
+8. [Handheld Halting](#day-8-handheld-halting)
+
 ## Day 1: Report Repair
 
 #### Silver
