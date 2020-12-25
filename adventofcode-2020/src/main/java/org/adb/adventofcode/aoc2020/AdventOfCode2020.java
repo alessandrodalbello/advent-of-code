@@ -4,11 +4,15 @@ import java.util.concurrent.TimeUnit;
 
 import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FastReader;
+import org.adb.adventofcode.io.FileResourceReader;
 import org.adb.adventofcode.io.StandardInputReader;
 
 public class AdventOfCode2020 {
 
+    private static final String BANNER_FILENAME = "banner.txt";
+
     public static void main(String[] args) {
+        loadBanner();
         System.out.print("Select an Advent of Code 2020 day [1-25]: ");
         try (FastReader inputReader = new StandardInputReader()) {
             int dayNumber = inputReader.nextInt();
@@ -26,6 +30,12 @@ public class AdventOfCode2020 {
         } catch (RuntimeException e) {
             System.err.println("*** INVALID DAY *** ");
             System.err.println("Select a valid day. A valid day is included between 1 and 25.");
+        }
+    }
+
+    private static void loadBanner() {
+        try (FileResourceReader reader = new FileResourceReader(BANNER_FILENAME)) {
+            reader.asLines().takeWhile(line -> !line.isBlank()).forEach(System.out::println);
         }
     }
 
