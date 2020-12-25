@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.adb</groupId>
         <artifactId>adventofcode</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>2020.1</version>
     </parent>
 
     <artifactId>adventofcode-api</artifactId>

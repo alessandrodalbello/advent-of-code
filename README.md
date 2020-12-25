@@ -1,6 +1,8 @@
-# Advent of Code 2020
+# Advent of Code
 
-My preparation for Christmas!
+How I prepare for Christmas! :christmas_tree::santa:
+
+Advent of Code is an Advent calendar of programming puzzles created by [Eric Wastl](https://github.com/topaz).
 
 ## How to
 
@@ -8,10 +10,4 @@ My preparation for Christmas!
 
     ```bash
     $ mvn clean compile
-    ```
-
- - Test a module (from module root):
- 
-    ```bash
-    $ mvn clean test
     ```
