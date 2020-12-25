@@ -4,18 +4,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 import org.adb.adventofcode.io.StringReader;
 
-class Day8 implements Solver {
+class Day08 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day8.txt";
+    private static final String INPUT_FILENAME = "input_day8.txt";
 
     private final List<Operation> code;
     private final CodeExecutionResult firstExecutionResult;
 
-    public Day8() {
+    public Day08() {
         try (FileResourceReader reader = new FileResourceReader(INPUT_FILENAME)) {
             code = reader.parseLines(this::parseOperation).collect(Collectors.toList());
         }

@@ -8,16 +8,16 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 
-class Day6 implements Solver {
+class Day06 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day6.txt";
+    private static final String INPUT_FILENAME = "input_day6.txt";
 
     private final List<GroupAnswers> answers;
 
-    public Day6() {
+    public Day06() {
         try (FileResourceReader reader = new FileResourceReader(INPUT_FILENAME)) {
             answers = reader.parseMultilines(this::parseGroupAnswers).collect(Collectors.toList());
         }

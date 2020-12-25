@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 
-class Day15 implements Solver {
+class Day15 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day15.txt";
+    private static final String INPUT_FILENAME = "input_day15.txt";
 
     private final int[] startingNumbers;
 

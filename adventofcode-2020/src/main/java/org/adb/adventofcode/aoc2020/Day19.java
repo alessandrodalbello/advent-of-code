@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 
-class Day19 implements Solver {
+class Day19 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day19.txt";
+    private static final String INPUT_FILENAME = "input_day19.txt";
 
     private final Rule rootRule;
     private final List<String> messages;

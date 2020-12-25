@@ -10,13 +10,13 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 import org.adb.adventofcode.io.StringReader;
 
-class Day16 implements Solver {
+class Day16 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day16.txt";
+    private static final String INPUT_FILENAME = "input_day16.txt";
 
     private final Map<String, FieldRule> fieldRules;
     private final List<Ticket> tickets;

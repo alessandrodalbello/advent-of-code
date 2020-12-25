@@ -4,16 +4,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 
-class Day5 implements Solver {
+class Day05 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day5.txt";
+    private static final String INPUT_FILENAME = "input_day5.txt";
 
     private final List<Integer> seatIds;
 
-    public Day5() {
+    public Day05() {
         try (FileResourceReader reader = new FileResourceReader(INPUT_FILENAME)) {
             seatIds = reader.asStream(this::parseSeat)
                     .sorted()

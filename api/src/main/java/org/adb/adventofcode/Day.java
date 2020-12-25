@@ -1,6 +1,6 @@
 package org.adb.adventofcode;
 
-public interface Solver {
+public interface Day {
 
     void solveSilver();
 

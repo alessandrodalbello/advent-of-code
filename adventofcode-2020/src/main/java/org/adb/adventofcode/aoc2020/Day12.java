@@ -3,12 +3,12 @@ package org.adb.adventofcode.aoc2020;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 
-class Day12 implements Solver {
+class Day12 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day12.txt";
+    private static final String INPUT_FILENAME = "input_day12.txt";
 
     private final List<ShipCommand> shipCommands;
 

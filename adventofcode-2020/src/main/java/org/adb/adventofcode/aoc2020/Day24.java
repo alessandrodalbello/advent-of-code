@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 
-class Day24 implements Solver {
+class Day24 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day24.txt";
+    private static final String INPUT_FILENAME = "input_day24.txt";
     private static final int HEXGRID_SIZE = 131;
 
     private final List<String> tileSequences;

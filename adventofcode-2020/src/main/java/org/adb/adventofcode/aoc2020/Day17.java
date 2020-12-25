@@ -1,11 +1,11 @@
 package org.adb.adventofcode.aoc2020;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 
-class Day17 implements Solver {
+class Day17 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day17.txt";
+    private static final String INPUT_FILENAME = "input_day17.txt";
     private static final int CYCLES = 6;
 
     private final char[][] initialState;

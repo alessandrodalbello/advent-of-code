@@ -5,12 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 
-class Day10 implements Solver {
+class Day10 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day10.txt";
+    private static final String INPUT_FILENAME = "input_day10.txt";
 
     private final List<Integer> adapters;
 

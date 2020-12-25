@@ -1,16 +1,16 @@
 package org.adb.adventofcode.aoc2020;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 
-class Day3 implements Solver {
+class Day03 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day3.txt";
+    private static final String INPUT_FILENAME = "input_day3.txt";
 
     private final String[] lines;
     private final int lineLength;
 
-    public Day3() {
+    public Day03() {
         try (FileResourceReader reader = new FileResourceReader(INPUT_FILENAME)) {
             lines = reader.asLines().toArray(String[]::new);
         }

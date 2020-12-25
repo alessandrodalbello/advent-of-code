@@ -5,12 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 
-class Day22 implements Solver {
+class Day22 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day22.txt";
+    private static final String INPUT_FILENAME = "input_day22.txt";
 
     private final List<Integer> player1Deck;
     private final List<Integer> player2Deck;

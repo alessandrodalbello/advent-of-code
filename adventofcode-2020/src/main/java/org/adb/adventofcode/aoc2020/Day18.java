@@ -7,12 +7,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 
-class Day18 implements Solver {
+class Day18 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day18.txt";
+    private static final String INPUT_FILENAME = "input_day18.txt";
     private static final Pattern PATTER_SIMPLIFY_EXPRESSION = Pattern.compile("\\(([^\\(\\)]+)\\)");
     private static final Pattern PATTER_SOLVE_SILVER = Pattern.compile("(\\b\\d+)([\\+\\*])(\\d+\\b)");
     private static final Pattern PATTER_SOLVE_GOLD = Pattern.compile("(\\b\\d+)\\+(\\d+\\b)");

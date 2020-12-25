@@ -11,12 +11,12 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 
-class Day21 implements Solver {
+class Day21 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day21.txt";
+    private static final String INPUT_FILENAME = "input_day21.txt";
 
     private final List<Recipe> recipes;
     private final List<String> safeIngredients;

@@ -7,12 +7,12 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 
-class Day20 implements Solver {
+class Day20 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day20.txt";
+    private static final String INPUT_FILENAME = "input_day20.txt";
 
     private static final int MONSTER_LENGTH = 20;
     private static final int MONSTER_HEIGHT = 3;

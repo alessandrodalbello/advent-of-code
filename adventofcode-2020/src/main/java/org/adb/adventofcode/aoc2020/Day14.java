@@ -9,13 +9,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 import org.adb.adventofcode.io.StringReader;
 
-class Day14 implements Solver {
+class Day14 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day14.txt";
+    private static final String INPUT_FILENAME = "input_day14.txt";
     private static final Pattern MEMORY_OPERATION_PATTERN = Pattern.compile("mem\\[(\\d+)\\]");
 
     private final List<Operation> code;

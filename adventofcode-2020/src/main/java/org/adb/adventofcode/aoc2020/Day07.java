@@ -7,17 +7,17 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 
-class Day7 implements Solver {
+class Day07 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day7.txt";
+    private static final String INPUT_FILENAME = "input_day7.txt";
     private static final String BAG_COLOR = "shiny gold";
 
     private final Map<String, Map<String, Integer>> bagRules;
 
-    public Day7() {
+    public Day07() {
         bagRules = new HashMap<>();
         try (FileResourceReader reader = new FileResourceReader(INPUT_FILENAME)) {
             List<String> rawBagRules = reader.asLines().collect(Collectors.toList());

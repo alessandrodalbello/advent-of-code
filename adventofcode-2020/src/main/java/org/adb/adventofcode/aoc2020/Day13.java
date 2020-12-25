@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 
-class Day13 implements Solver {
+class Day13 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day13.txt";
+    private static final String INPUT_FILENAME = "input_day13.txt";
 
     private final long target;
     private final Map<Long, Integer> busses;

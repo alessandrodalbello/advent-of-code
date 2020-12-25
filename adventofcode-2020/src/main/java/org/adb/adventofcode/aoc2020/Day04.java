@@ -3,17 +3,17 @@ package org.adb.adventofcode.aoc2020;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 import org.adb.adventofcode.io.StringReader;
 
-class Day4 implements Solver {
+class Day04 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day4.txt";
+    private static final String INPUT_FILENAME = "input_day4.txt";
 
     private final List<Passport> passports;
 
-    public Day4() {
+    public Day04() {
         try (FileResourceReader reader = new FileResourceReader(INPUT_FILENAME)) {
             passports = reader.parseMultilines(this::parsePassport).collect(Collectors.toList());
         }

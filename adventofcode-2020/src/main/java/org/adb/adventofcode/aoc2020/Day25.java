@@ -1,11 +1,11 @@
 package org.adb.adventofcode.aoc2020;
 
-import org.adb.adventofcode.Solver;
+import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
 
-class Day25 implements Solver {
+class Day25 implements Day {
 
-    private static final String INPUT_FILENAME = "aoc_day25.txt";
+    private static final String INPUT_FILENAME = "input_day25.txt";
     private static final long GEN_NUMBER = 7;
     private static final long REM_NUMBER = 20201227;
 
