@@ -13,7 +13,7 @@ public class AdventOfCode2020 {
 
     public static void main(String[] args) {
         loadBanner();
-        System.out.print("Select an Advent of Code 2020 day [1-25]: ");
+        System.out.printf("%nSelect an Advent of Code 2020 day [1-25]: ");
         try (FastReader inputReader = new StandardInputReader()) {
             int dayNumber = inputReader.nextInt();
             if (dayNumber < 1 || dayNumber > 25) {

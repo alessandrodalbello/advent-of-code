@@ -2,7 +2,8 @@
 
 How I prepare for Christmas! :christmas_tree::santa:
 
-Advent of Code is an Advent calendar of programming puzzles created by [Eric Wastl](https://github.com/topaz).
+[Advent of Code](https://adventofcode.com) is an advent calendar of programming puzzles created by
+[Eric Wastl](https://github.com/topaz).
 
 ## How to
 
