@@ -13,7 +13,7 @@
     <url>https://github.com/alessandrodalbello/advent-of-code</url>
 
     <modules>
-        <module>api</module>
+        <module>shared</module>
         <module>adventofcode-2020</module>
     </modules>
 

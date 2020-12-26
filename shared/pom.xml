@@ -10,7 +10,7 @@
         <version>2020.1</version>
     </parent>
 
-    <artifactId>adventofcode-api</artifactId>
+    <artifactId>adventofcode-shared</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
