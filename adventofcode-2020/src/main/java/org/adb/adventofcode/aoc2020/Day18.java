@@ -30,7 +30,6 @@ class Day18 implements Day {
         long total = 0;
         for (String expression : expressions) {
             long value = evaluateExpression(expression, this::solveSilverExpression);
-            System.out.printf("%s => %d%n", expression, value);
             total += value;
         }
         System.out.printf("The sum of homeworks with equal precedence is %d.%n", total);
