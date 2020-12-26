@@ -54,7 +54,12 @@ class Day21 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Allergen Assessment";
+    }
+
+    @Override
+    public String solveSilver() {
         Map<String, List<Recipe>> recipesByIngredient = new HashMap<>();
         for (Recipe recipe : recipes) {
             for (String ingredient : recipe.ingredients) {
@@ -81,15 +86,15 @@ class Day21 implements Day {
                 safeIngredients.add(ingredient);
             }
         }
-        System.out.printf("The frequency of safe ingredients is %d.%n", safeIngredientsFrequency);
+        return String.format("The frequency of safe ingredients is %d.", safeIngredientsFrequency);
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         Map<String, Set<String>> possibleAllergensByIngredient = possibleAllergensByIngredient();
         SortedMap<String, String> ingredientByAllergen = identifyAllergens(possibleAllergensByIngredient);
         String dangerousIngredients = String.join(",", ingredientByAllergen.values());
-        System.out.printf("Canonical dangerous ingredient list: %s.%n", dangerousIngredients);
+        return String.format("Canonical dangerous ingredient list: %s.", dangerousIngredients);
     }
 
     private Map<String, Set<String>> possibleAllergensByIngredient() {

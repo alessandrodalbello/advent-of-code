@@ -44,9 +44,14 @@ class Day07 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Handy Haversacks";
+    }
+
+    @Override
+    public String solveSilver() {
         Set<String> distinctColors = getDistinctColors(BAG_COLOR);
-        System.out.printf("There are %d distinct colors that can contain %s bags.%n", distinctColors.size(), BAG_COLOR);
+        return String.format("There are %d distinct colors that can contain %s bags.", distinctColors.size(), BAG_COLOR);
     }
 
     private Set<String> getDistinctColors(String targetColor) {
@@ -62,9 +67,9 @@ class Day07 implements Day {
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         long numberOfBags = countBags(BAG_COLOR, new HashMap<>()) - 1;
-        System.out.printf("There are %d other bags inside a %s bag.%n", numberOfBags, BAG_COLOR);
+        return String.format("There are %d other bags inside a %s bag.", numberOfBags, BAG_COLOR);
     }
 
     private long countBags(String color, Map<String, Long> memory) {

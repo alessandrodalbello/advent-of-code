@@ -21,7 +21,12 @@ class Day10 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Adapter Array";
+    }
+
+    @Override
+    public String solveSilver() {
         int joltsDiff1 = 0;
         int joltsDiff3 = 1;
         int previous = 0;
@@ -33,11 +38,11 @@ class Day10 implements Day {
             }
             previous = current;
         }
-        System.out.printf("The product of jolt differences is %d.%n", joltsDiff1 * joltsDiff3);
+        return String.format("The product of jolt differences is %d.", joltsDiff1 * joltsDiff3);
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         List<Integer> adaptersCopy = new ArrayList<>(List.of(0));
         adaptersCopy.addAll(adapters);
 
@@ -45,7 +50,7 @@ class Day10 implements Day {
         Arrays.fill(cache, 0L);
         cache[0] = 1L;
         long adapterCombos = countPaths(adaptersCopy, adaptersCopy.size() - 1, cache);
-        System.out.printf("The number of possible adapters combinations is %d.%n", adapterCombos);
+        return String.format("The number of possible adapters combinations is %d.", adapterCombos);
     }
 
     private long countPaths(List<Integer> adapters, int position, long[] cache) {

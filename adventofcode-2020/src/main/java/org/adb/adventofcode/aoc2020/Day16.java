@@ -74,7 +74,12 @@ class Day16 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Ticket Translation";
+    }
+
+    @Override
+    public String solveSilver() {
         int minValue = fieldRules.values().stream()
                 .mapToInt(fieldRule -> fieldRule.range1[0])
                 .min().orElseThrow();
@@ -82,7 +87,7 @@ class Day16 implements Day {
                 .mapToInt(fieldRule -> fieldRule.range2[1])
                 .min().orElseThrow();
         int errorRate = identifyInvalidTickets(minValue, maxValue);
-        System.out.printf("The ticket scanning error rate is %d.%n", errorRate);
+        return String.format("The ticket scanning error rate is %d.", errorRate);
     }
 
     private int identifyInvalidTickets(int minValue, int maxValue) {
@@ -104,7 +109,7 @@ class Day16 implements Day {
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         Map<String, Set<Integer>> fieldNameOptions = calculateOptions();
         Map<String, Integer> fieldNameMatches = identifyMatches(fieldNameOptions);
 
@@ -114,7 +119,7 @@ class Day16 implements Day {
                 .mapToInt(Map.Entry::getValue)
                 .mapToLong(i -> ticket.fields[i])
                 .reduce(1L, (a, b) -> a * b);
-        System.out.printf("The product of departures is %d.%n", result);
+        return String.format("The product of departures is %d.", result);
     }
 
     private Map<String, Set<Integer>> calculateOptions() {

@@ -2,7 +2,9 @@ package org.adb.adventofcode;
 
 public interface Day {
 
-    void solveSilver();
+    String solveSilver();
 
-    void solveGold();
+    String solveGold();
+
+    String title();
 }

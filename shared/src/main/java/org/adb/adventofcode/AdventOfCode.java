@@ -92,7 +92,7 @@ public class AdventOfCode implements Callable<Integer> {
             throw new IllegalArgumentException("Invalid day number: out of range.");
         }
         Day day = loadDay(dayNumber);
-        System.out.printf("Solving day %d...%n", dayNumber);
+        System.out.printf("Solving day %d (%s)...%n", dayNumber, day.title());
         solveDay(day);
     }
 
@@ -106,21 +106,21 @@ public class AdventOfCode implements Callable<Integer> {
     private void solveDay(Day day) {
         long tStart = System.nanoTime();
         System.out.print("\t* SILVER: ");
-        day.solveSilver();
+        String silverResult = day.solveSilver();
         long tSilver = System.nanoTime();
-        if (trackTimes) {
-            printTimeLog(tSilver - tStart);
-        }
+        printResult(silverResult, tSilver - tStart);
 
         System.out.print("\t**  GOLD: ");
-        day.solveGold();
+        String goldResult = day.solveGold();
         long tGold = System.nanoTime();
-        if (trackTimes) {
-            printTimeLog(tGold - tSilver);
-        }
+        printResult(goldResult, tGold - tSilver);
     }
 
-    private void printTimeLog(long nanos) {
-        System.out.printf("\t(%d ms)%n", TimeUnit.NANOSECONDS.toMillis(nanos));
+    private void printResult(String result, long nanos) {
+        System.out.print(result);
+        if (trackTimes) {
+            System.out.printf(" (%d ms)", TimeUnit.NANOSECONDS.toMillis(nanos));
+        }
+        System.out.printf("%n");
     }
 }

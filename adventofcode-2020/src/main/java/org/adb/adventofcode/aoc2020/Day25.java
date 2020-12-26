@@ -21,10 +21,15 @@ class Day25 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Combo Breaker";
+    }
+
+    @Override
+    public String solveSilver() {
         int cardLoopSize = crackLoopSize(cardPubKey);
         long encryptionKey = calculateEncryptionKey(doorPubKey, cardLoopSize);
-        System.out.printf("The encryption key is %d.%n", encryptionKey);
+        return String.format("The encryption key is %d.", encryptionKey);
     }
 
     private int crackLoopSize(long pubKey) {
@@ -47,7 +52,7 @@ class Day25 implements Day {
     }
 
     @Override
-    public void solveGold() {
-        System.out.printf("Merry Christmas!!%n");
+    public String solveGold() {
+        return "Merry Christmas!!";
     }
 }

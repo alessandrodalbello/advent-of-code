@@ -80,11 +80,16 @@ class Day19 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Monster Messages";
+    }
+
+    @Override
+    public String solveSilver() {
         long validMessages = messages.stream()
                 .filter(this::isValidMessage)
                 .count();
-        System.out.printf("There are %d valid silver messages.%n", validMessages);
+        return String.format("There are %d valid silver messages.", validMessages);
     }
 
     private boolean isValidMessage(String message) {
@@ -126,14 +131,14 @@ class Day19 implements Day {
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         final List<String> rule42SubMessages = rule42SubMessages();
         final List<String> rule31SubMessages = rule31SubMessages();
 
         long validMessages = messages.stream()
                 .filter(message -> isValidMessage(message, rule42SubMessages, rule31SubMessages))
                 .count();
-        System.out.printf("There are %d valid gold messages.%n", validMessages);
+        return String.format("There are %d valid gold messages.", validMessages);
     }
 
     private List<String> rule42SubMessages() {

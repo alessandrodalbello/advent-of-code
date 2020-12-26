@@ -30,7 +30,12 @@ class Day06 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Custom Customs";
+    }
+
+    @Override
+    public String solveSilver() {
         int totalAnswers = 0;
         for (GroupAnswers groupAnswers : answers) {
             Set<Integer> set = new HashSet<>();
@@ -41,11 +46,11 @@ class Day06 implements Day {
             });
             totalAnswers += set.size();
         }
-        System.out.printf("The sum of the answers in each group is %d.%n", totalAnswers);
+        return String.format("The sum of the answers in each group is %d.", totalAnswers);
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         int totalAnswers = 0;
         for (GroupAnswers groupAnswers : answers) {
             Map<Integer, Integer> charFrequency = new HashMap<>();
@@ -59,7 +64,7 @@ class Day06 implements Day {
                     .filter(entry -> entry.getValue() == groupAnswers.answers.size())
                     .count();
         }
-        System.out.printf("The sum of the shared answers in each group is %d.%n", totalAnswers);
+        return String.format("The sum of the shared answers in each group is %d.", totalAnswers);
     }
 
     private static class GroupAnswers {

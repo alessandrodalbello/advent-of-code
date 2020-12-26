@@ -46,7 +46,12 @@ class Day14 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Docking Data";
+    }
+
+    @Override
+    public String solveSilver() {
         Map<Long, Long> memory = new HashMap<>();
         String mask = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
         for (Operation operation : code) {
@@ -70,11 +75,11 @@ class Day14 implements Day {
         }
 
         long memoryTotalValue = sumOfMemory(memory);
-        System.out.printf("The sum of non-zero memory addresses is %d.%n", memoryTotalValue);
+        return String.format("The sum of non-zero memory addresses is %d.", memoryTotalValue);
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         Map<Long, Long> memory = new HashMap<>();
         String mask = "000000000000000000000000000000000000";
         for (Operation operation : code) {
@@ -111,7 +116,7 @@ class Day14 implements Day {
         }
 
         long memoryTotalValue = sumOfMemory(memory);
-        System.out.printf("The sum of non-zero memory addresses is %d.%n", memoryTotalValue);
+        return String.format("The sum of non-zero memory addresses is %d.", memoryTotalValue);
     }
 
     private long sumOfMemory(Map<Long, Long> memory) {

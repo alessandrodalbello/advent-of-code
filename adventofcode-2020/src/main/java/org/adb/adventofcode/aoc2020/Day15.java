@@ -20,15 +20,20 @@ class Day15 implements Day {
     }
 
     @Override
-    public void solveSilver() {
-        int numb = getNth(2020);
-        System.out.printf("The 2020th number spoken is %d.%n", numb);
+    public String title() {
+        return "Rambunctious Recitation";
     }
 
     @Override
-    public void solveGold() {
+    public String solveSilver() {
+        int numb = getNth(2020);
+        return String.format("The 2020th number spoken is %d.", numb);
+    }
+
+    @Override
+    public String solveGold() {
         int numb = getNth(30000000);
-        System.out.printf("The 30000000th number spoken is %d.%n", numb);
+        return String.format("The 30000000th number spoken is %d.", numb);
     }
 
     private int getNth(int n) {

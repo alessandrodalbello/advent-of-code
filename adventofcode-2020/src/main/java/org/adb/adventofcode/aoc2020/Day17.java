@@ -19,7 +19,12 @@ class Day17 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Conway Cubes";
+    }
+
+    @Override
+    public String solveSilver() {
         int finalSize = initialState.length + CYCLES * 2;
         char[][][] cube = empty3DCube(finalSize);
 
@@ -27,7 +32,7 @@ class Day17 implements Day {
             cube = simulate3D(cube);
         }
         int actives = countActives3D(cube);
-        System.out.printf("There are %d active cubes at the end of the six-cycle boot process in 3D space.%n", actives);
+        return String.format("There are %d active cubes at the end of the six-cycle boot process in 3D space.", actives);
     }
 
     private char[][][] empty3DCube(int size) {
@@ -106,7 +111,7 @@ class Day17 implements Day {
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         int finalSize = initialState.length + CYCLES * 2;
         char[][][][] cube = empty4DCube(finalSize);
 
@@ -114,7 +119,7 @@ class Day17 implements Day {
             cube = simulate4D(cube);
         }
         int actives = countActives4D(cube);
-        System.out.printf("There are %d active cubes at the end of the six-cycle boot process in 4D space.%n", actives);
+        return String.format("There are %d active cubes at the end of the six-cycle boot process in 4D space.", actives);
     }
 
     private char[][][][] empty4DCube(int size) {

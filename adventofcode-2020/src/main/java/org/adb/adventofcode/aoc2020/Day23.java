@@ -32,14 +32,19 @@ class Day23 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Crab Cups";
+    }
+
+    @Override
+    public String solveSilver() {
         final Cups cups = toCups();
         for (int n = 1; n <= 100; n++) {
             moveCups(cups);
         }
 
         String result = toCupsResult(cups);
-        System.out.printf("The final result of simple crab cup is %s.%n", result);
+        return String.format("The final result of simple crab cup is %s.", result);
     }
 
     private Cups toCups() {
@@ -61,7 +66,7 @@ class Day23 implements Day {
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         final int maxValue = 1000000;
         final Cups cups = toCups(maxValue);
 
@@ -73,7 +78,7 @@ class Day23 implements Day {
         long a = cup1.next.value;
         long b = cup1.next.next.value;
         long result = a * b;
-        System.out.printf("The final result of big crab cup is %s.%n", result);
+        return String.format("The final result of big crab cup is %s.", result);
     }
 
     private Cups toCups(int maxValue) {

@@ -29,11 +29,16 @@ class Day02 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Password Philosophy";
+    }
+
+    @Override
+    public String solveSilver() {
         long valid = passwordPolicies.stream()
                 .filter(this::isPolicyValidByFrequency)
                 .count();
-        System.out.printf("There are %d valid passwords by frequency of target char.%n", valid);
+        return String.format("There are %d valid passwords by frequency of target char.", valid);
     }
 
     private boolean isPolicyValidByFrequency(PasswordPolicy passwordPolicy) {
@@ -44,11 +49,11 @@ class Day02 implements Day {
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         long valid = passwordPolicies.stream()
                 .filter(this::isPolicyValidByIndex)
                 .count();
-        System.out.printf("There are %d valid passwords by index positions of target char.%n", valid);
+        return String.format("There are %d valid passwords by index positions of target char.", valid);
     }
 
     private boolean isPolicyValidByIndex(PasswordPolicy passwordPolicy) {

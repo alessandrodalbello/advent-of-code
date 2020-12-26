@@ -55,7 +55,12 @@ class Day20 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Jurassic Jigsaw";
+    }
+
+    @Override
+    public String solveSilver() {
         Tile firstCorner = tiles.stream()
                 .filter(this::isTileCorner)
                 .findFirst().orElseThrow();
@@ -78,7 +83,7 @@ class Day20 implements Day {
                 * completeImage[0][imageSize - 1].id
                 * completeImage[imageSize - 1][0].id
                 * completeImage[imageSize - 1][imageSize - 1].id;
-        System.out.printf("The product of corners is %d.%n", cornersProduct);
+        return String.format("The product of corners is %d.", cornersProduct);
     }
 
     private boolean isTileCorner(Tile tile) {
@@ -215,13 +220,13 @@ class Day20 implements Day {
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         for (Tile tile : tiles) {
             tile.image = cropTileImage(tile.image);
         }
         char[][] finalImage = mergeTiles();
         int roughWaters = countRoughWaters(finalImage);
-        System.out.printf("There are %d rough waters in the final image.%n", roughWaters);
+        return String.format("There are %d rough waters in the final image.", roughWaters);
     }
 
     private char[][] cropTileImage(char[][] image) {

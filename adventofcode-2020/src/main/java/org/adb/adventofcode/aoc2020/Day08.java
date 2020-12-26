@@ -13,13 +13,13 @@ class Day08 implements Day {
     private static final String INPUT_FILENAME = "input_day8.txt";
 
     private final List<Operation> code;
-    private final CodeExecutionResult firstExecutionResult;
+
+    private CodeExecutionResult firstExecutionResult;
 
     public Day08() {
         try (FileResourceReader reader = new FileResourceReader(INPUT_FILENAME)) {
             code = reader.parseLines(this::parseOperation).collect(Collectors.toList());
         }
-        firstExecutionResult = executeCode(code);
     }
 
     private Operation parseOperation(String rawOperation) {
@@ -31,12 +31,18 @@ class Day08 implements Day {
     }
 
     @Override
-    public void solveSilver() {
-        System.out.printf("The value of the accumulator before the loop is %d.%n", firstExecutionResult.result);
+    public String title() {
+        return "Handheld Halting";
     }
 
     @Override
-    public void solveGold() {
+    public String solveSilver() {
+        firstExecutionResult = executeCode(code);
+        return String.format("The value of the accumulator before the loop is %d.", firstExecutionResult.result);
+    }
+
+    @Override
+    public String solveGold() {
         CodeExecutionResult executionResult = firstExecutionResult;
         List<Integer> executedOps = executionResult.executedOps;
         int i = executedOps.size() - 1;
@@ -52,7 +58,7 @@ class Day08 implements Day {
             }
             i--;
         }
-        System.out.printf("The value of the accumulator after code has been fixed is %d.%n", executionResult.result);
+        return String.format("The value of the accumulator after code has been fixed is %d.", executionResult.result);
     }
 
     private CodeExecutionResult executeCode(List<Operation> code) {

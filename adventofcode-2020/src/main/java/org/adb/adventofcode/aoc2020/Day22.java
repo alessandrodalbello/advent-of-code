@@ -31,10 +31,15 @@ class Day22 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Crab Combat";
+    }
+
+    @Override
+    public String solveSilver() {
         CrabCombatResult combatResult = playCombat(new LinkedList<>(player1Deck), new LinkedList<>(player2Deck));
         int score = calculateScore(combatResult.winningDeck);
-        System.out.printf("The score of the winning player of Combat is %d.%n", score);
+        return String.format("The score of the winning player of Combat is %d.", score);
     }
 
     private CrabCombatResult playCombat(LinkedList<Integer> player1Deck, LinkedList<Integer> player2Deck) {
@@ -56,10 +61,10 @@ class Day22 implements Day {
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         CrabCombatResult combatResult = playRecursiveCombat(new LinkedList<>(player1Deck), new LinkedList<>(player2Deck));
         int score = calculateScore(combatResult.winningDeck);
-        System.out.printf("The score of the winning player of Recursive Combat is %d.%n", score);
+        return String.format("The score of the winning player of Recursive Combat is %d.", score);
     }
 
     private CrabCombatResult playRecursiveCombat(LinkedList<Integer> player1Deck, LinkedList<Integer> player2Deck) {

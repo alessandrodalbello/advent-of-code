@@ -30,7 +30,12 @@ class Day13 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Shuttle Search";
+    }
+
+    @Override
+    public String solveSilver() {
         long closestBus = -1;
         long minMinutes = Long.MAX_VALUE;
         for (Long bus : busses.keySet()) {
@@ -41,11 +46,11 @@ class Day13 implements Day {
             }
         }
         long answer = closestBus * minMinutes;
-        System.out.printf("The ID of the closest bus multiplied to the number of minutes to wait is %d.%n", answer);
+        return String.format("The ID of the closest bus multiplied to the number of minutes to wait is %d.", answer);
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         long timestamp = busses.entrySet().stream()
                 .filter(entry -> entry.getValue() == 0)
                 .map(Map.Entry::getKey)
@@ -62,6 +67,6 @@ class Day13 implements Day {
                 timestamp += increment;
             }
         }
-        System.out.printf("The first timestamp at which busses departure at the same time based on their offset is %d.%n", timestamp);
+        return String.format("The first timestamp at which busses departure at the same time based on their offset is %d.", timestamp);
     }
 }

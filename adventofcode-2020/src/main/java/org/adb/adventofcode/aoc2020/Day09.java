@@ -18,9 +18,14 @@ class Day09 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Encoding Error";
+    }
+
+    @Override
+    public String solveSilver() {
         long target = findTarget();
-        System.out.printf("The first number which can't be obtained from the previous 25 is %d.%n", target);
+        return String.format("The first number which can't be obtained from the previous 25 is %d.", target);
     }
 
     private long findTarget() {
@@ -49,13 +54,13 @@ class Day09 implements Day {
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         long target = findTarget();
         long[] targetRange = findTargetRange(target);
         Arrays.sort(targetRange);
         long min = targetRange[0];
         long max = targetRange[targetRange.length - 1];
-        System.out.printf("The sum of minimum and maximum values in the target range is %d.%n", min + max);
+        return String.format("The sum of minimum and maximum values in the target range is %d.", min + max);
     }
 
     private long[] findTargetRange(long target) {

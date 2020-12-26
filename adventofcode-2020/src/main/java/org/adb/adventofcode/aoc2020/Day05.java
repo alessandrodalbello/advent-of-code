@@ -43,13 +43,18 @@ class Day05 implements Day {
     }
 
     @Override
-    public void solveSilver() {
-        int lastSeatId = seatIds.get(seatIds.size() - 1);
-        System.out.printf("The highest seat ID in the plane is %d.%n", lastSeatId);
+    public String title() {
+        return "Binary Boarding";
     }
 
     @Override
-    public void solveGold() {
+    public String solveSilver() {
+        int lastSeatId = seatIds.get(seatIds.size() - 1);
+        return String.format("The highest seat ID in the plane is %d.", lastSeatId);
+    }
+
+    @Override
+    public String solveGold() {
         int missingSeatId = -1;
         int i = 1;
         while (missingSeatId < 0) {
@@ -58,6 +63,6 @@ class Day05 implements Day {
             }
             i += 1;
         }
-        System.out.printf("The missing seat ID is %d.%n", missingSeatId);
+        return String.format("The missing seat ID is %d.", missingSeatId);
     }
 }

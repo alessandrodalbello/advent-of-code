@@ -26,13 +26,18 @@ class Day18 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Operation Order";
+    }
+
+    @Override
+    public String solveSilver() {
         long total = 0;
         for (String expression : expressions) {
             long value = evaluateExpression(expression, this::solveSilverExpression);
             total += value;
         }
-        System.out.printf("The sum of homeworks with equal precedence is %d.%n", total);
+        return String.format("The sum of homeworks with equal precedence is %d.", total);
     }
 
     private String solveSilverExpression(String expression) {
@@ -49,12 +54,12 @@ class Day18 implements Day {
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         long total = 0;
         for (String expression : expressions) {
             total += evaluateExpression(expression, this::solveGoldExpression);
         }
-        System.out.printf("The sum of homeworks with different precedence is %d.%n", total);
+        return String.format("The sum of homeworks with different precedence is %d.", total);
     }
 
     private String solveGoldExpression(String expression) {

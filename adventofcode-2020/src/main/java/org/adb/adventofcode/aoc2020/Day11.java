@@ -16,10 +16,15 @@ class Day11 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Seating System";
+    }
+
+    @Override
+    public String solveSilver() {
         char[][] stableSeats = doOnboardAirplaneSilver(seats);
         int occupied = countOccupied(stableSeats);
-        System.out.printf("After all people have sat down based on silver rules, %d are occupied.%n", occupied);
+        return String.format("After all people have sat down based on silver rules, %d are occupied.", occupied);
     }
 
     private char[][] doOnboardAirplaneSilver(char[][] seats) {
@@ -62,10 +67,10 @@ class Day11 implements Day {
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         char[][] stableSeats = doOnboardAirplaneGold(seats);
         int occupied = countOccupied(stableSeats);
-        System.out.printf("After all people have sat down based on gold rules, %d are occupied.%n", occupied);
+        return String.format("After all people have sat down based on gold rules, %d are occupied.", occupied);
     }
 
     private char[][] doOnboardAirplaneGold(char[][] seats) {

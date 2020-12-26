@@ -18,25 +18,25 @@ class Day03 implements Day {
     }
 
     @Override
-    public void solveSilver() {
-        long trees = countTrees(3, 1);
-        System.out.printf("Trees counted using slope (r3, d1): %d%n", trees);
+    public String title() {
+        return "Toboggan Trajectory";
     }
 
     @Override
-    public void solveGold() {
+    public String solveSilver() {
+        long trees = countTrees(3, 1);
+        return String.format("Trees counted using slope (r3, d1): %d", trees);
+    }
+
+    @Override
+    public String solveGold() {
         long trees11 = countTrees(1, 1);
-        System.out.printf("Trees counted using slope (r1, d1): %d%n", trees11);
         long trees13 = countTrees(3, 1);
-        System.out.printf("Trees counted using slope (r3, d1): %d%n", trees13);
         long trees15 = countTrees(5, 1);
-        System.out.printf("Trees counted using slope (r5, d1): %d%n", trees15);
         long trees17 = countTrees(7, 1);
-        System.out.printf("Trees counted using slope (r7, d1): %d%n", trees17);
         long trees21 = countTrees(1, 2);
-        System.out.printf("Trees counted using slope (r1, d2): %d%n", trees21);
         long prod = trees11 * trees13 * trees15 * trees17 * trees21;
-        System.out.printf("The product of the slopes is %d%n", prod);
+        return String.format("The product of the slopes is %d", prod);
     }
 
     private long countTrees(int right, int down) {

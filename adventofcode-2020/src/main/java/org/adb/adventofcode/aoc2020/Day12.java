@@ -25,7 +25,12 @@ class Day12 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Rain Risk";
+    }
+
+    @Override
+    public String solveSilver() {
         char direction = 'E';
         int northOffset = 0;
         int eastOffset = 0;
@@ -115,11 +120,11 @@ class Day12 implements Day {
             }
         }
         int manhattanDistance = manhattanDistance(northOffset, eastOffset);
-        System.out.printf("The Manhattan distance using the silver command system is %d.%n", manhattanDistance);
+        return String.format("The Manhattan distance using the silver command system is %d.", manhattanDistance);
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         int wpNorth = 1;
         int wpEast = 10;
         int northOffset = 0;
@@ -165,7 +170,7 @@ class Day12 implements Day {
             }
         }
         int manhattanDistance = manhattanDistance(northOffset, eastOffset);
-        System.out.printf("The Manhattan distance using the gold command system is %d.%n", manhattanDistance);
+        return String.format("The Manhattan distance using the gold command system is %d.", manhattanDistance);
     }
 
     private int manhattanDistance(int northOffset, int eastOffset) {

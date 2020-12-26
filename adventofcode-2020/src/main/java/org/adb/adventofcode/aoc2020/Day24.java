@@ -23,10 +23,15 @@ class Day24 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Lobby Layout";
+    }
+
+    @Override
+    public String solveSilver() {
         completeFloor();
         int blackTiles = countBlackTiles();
-        System.out.printf("There are %d black tiles after the floor is completed.%n", blackTiles);
+        return String.format("There are %d black tiles after the floor is completed.", blackTiles);
     }
 
     private void completeFloor() {
@@ -63,12 +68,12 @@ class Day24 implements Day {
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         for (int n = 1; n <= 100; n++) {
             flipTiles();
         }
         int blackTiles = countBlackTiles();
-        System.out.printf("There are %d black tiles after 100 days of art exhibition.%n", blackTiles);
+        return String.format("There are %d black tiles after 100 days of art exhibition.", blackTiles);
     }
 
     private void flipTiles() {

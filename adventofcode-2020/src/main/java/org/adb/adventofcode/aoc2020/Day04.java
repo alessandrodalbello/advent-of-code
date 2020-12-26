@@ -65,11 +65,16 @@ class Day04 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Passport Processing";
+    }
+
+    @Override
+    public String solveSilver() {
         long valid = passports.stream()
                 .filter(this::isValidPassportByNumberOfFields)
                 .count();
-        System.out.printf("There are %d passports with the correct number of fields.%n", valid);
+        return String.format("There are %d passports with the correct number of fields.", valid);
     }
 
     private boolean isValidPassportByNumberOfFields(Passport passport) {
@@ -81,11 +86,11 @@ class Day04 implements Day {
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         long valid = passports.stream()
                 .filter(this::isValidPassportByFieldConstraints)
                 .count();
-        System.out.printf("There are %d passports with the correct number of valid fields.%n", valid);
+        return String.format("There are %d passports with the correct number of valid fields.", valid);
     }
 
     private boolean isValidPassportByFieldConstraints(Passport passport) {

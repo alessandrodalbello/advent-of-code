@@ -17,7 +17,12 @@ class Day01 implements Day {
     }
 
     @Override
-    public void solveSilver() {
+    public String title() {
+        return "Report Repair";
+    }
+
+    @Override
+    public String solveSilver() {
         for (int i = 0, length = expenses.length; i < length - 1; i++) {
             final int a = expenses[i];
             if (a > TARGET) continue;
@@ -25,15 +30,15 @@ class Day01 implements Day {
                 final int b = expenses[j];
                 if (a + b == TARGET) {
                     int prod = a * b;
-                    System.out.printf("%d * %d -> %d%n", a, b, prod);
-                    return;
+                    return String.format("%d * %d -> %d", a, b, prod);
                 }
             }
         }
+        return null;
     }
 
     @Override
-    public void solveGold() {
+    public String solveGold() {
         for (int i = 0, length = expenses.length; i < length - 2; i++) {
             final int a = expenses[i];
             if (a > TARGET) continue;
@@ -44,11 +49,11 @@ class Day01 implements Day {
                     final int c = expenses[k];
                     if (a + b + c == TARGET) {
                         int prod = a * b * c;
-                        System.out.printf("%d * %d * %d -> %d%n", a, b, c, prod);
-                        return;
+                        return String.format("%d * %d * %d -> %d", a, b, c, prod);
                     }
                 }
             }
         }
+        return null;
     }
 }
