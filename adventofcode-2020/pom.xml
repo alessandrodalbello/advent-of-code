@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>org.adb</groupId>
-        <artifactId>adventofcode</artifactId>
+        <artifactId>adventofcode-2020</artifactId>
         <version>2020.1</version>
     </parent>
 
@@ -15,10 +15,9 @@
     <dependencies>
         <dependency>
             <groupId>org.adb</groupId>
-            <artifactId>adventofcode-api</artifactId>
+            <artifactId>adventofcode-shared</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-
 
 </project>
