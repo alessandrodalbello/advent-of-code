@@ -48,6 +48,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Application dependencies -->
+        <picocli.version>4.5.2</picocli.version>
+        <!-- Test dependencies -->
         <junit.version>5.7.0</junit.version>
 
         <!-- Maven compiler -->
@@ -61,6 +63,13 @@
     <dependencyManagement>
         <dependencies>
             <!-- Application dependencies -->
+            <dependency>
+                <groupId>info.picocli</groupId>
+                <artifactId>picocli</artifactId>
+                <version>${picocli.version}</version>
+            </dependency>
+
+            <!-- Test dependencies -->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>

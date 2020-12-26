@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>org.adb</groupId>
-        <artifactId>adventofcode-2020</artifactId>
+        <artifactId>adventofcode</artifactId>
         <version>2020.1</version>
     </parent>
 
