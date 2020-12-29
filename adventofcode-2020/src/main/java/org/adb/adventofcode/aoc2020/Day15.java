@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
+import org.adb.adventofcode.io.StringReader;
 
 class Day15 implements Day {
 
@@ -14,7 +15,8 @@ class Day15 implements Day {
     private final int[] startingNumbers;
 
     public Day15() {
-        try (FileResourceReader reader = new FileResourceReader(INPUT_FILENAME)) {
+        try (FileResourceReader fileReader = new FileResourceReader(INPUT_FILENAME);
+             StringReader reader = new StringReader(fileReader.nextString())) {
             startingNumbers = reader.nextIntSplit(",");
         }
     }

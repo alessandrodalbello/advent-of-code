@@ -11,8 +11,6 @@ class FileResourceReaderTest {
 
     private static final String NUMBERS_TEST_FILENAME = "numbers_test.txt";
     private static final String STRINGS_TEST_FILENAME = "strings_test.txt";
-    private static final String SPLIT_NUMBERS_TEST_FILENAME = "split_numbers_test.txt";
-    private static final String SPLIT_STRINGS_TEST_FILENAME = "split_strings_test.txt";
 
     @Test
     void nextInt() {
@@ -67,41 +65,6 @@ class FileResourceReaderTest {
             assertEquals("a", unit.nextString());
             assertEquals("b", unit.nextString());
             assertEquals("c", unit.nextString());
-        }
-    }
-
-    @Test
-    void nextIntSplit() {
-        try (FileResourceReader unit = new FileResourceReader(SPLIT_NUMBERS_TEST_FILENAME)) {
-            assertArrayEquals(new int[]{42, 73, 1337}, unit.nextIntSplit("-"));
-        }
-    }
-
-    @Test
-    void nextLongSplit() {
-        try (FileResourceReader unit = new FileResourceReader(SPLIT_NUMBERS_TEST_FILENAME)) {
-            assertArrayEquals(new long[]{42L, 73L, 1337L}, unit.nextLongSplit("-"));
-        }
-    }
-
-    @Test
-    void nextDoubleSplit() {
-        try (FileResourceReader unit = new FileResourceReader(SPLIT_NUMBERS_TEST_FILENAME)) {
-            assertArrayEquals(new double[]{42d, 73d, 1337d}, unit.nextDoubleSplit("-"));
-        }
-    }
-
-    @Test
-    void nextCharSplit() {
-        try (FileResourceReader unit = new FileResourceReader(SPLIT_STRINGS_TEST_FILENAME)) {
-            assertArrayEquals(new char[]{'h', 'w'}, unit.nextCharSplit(":"));
-        }
-    }
-
-    @Test
-    void nextSplit() {
-        try (FileResourceReader unit = new FileResourceReader(SPLIT_STRINGS_TEST_FILENAME)) {
-            assertArrayEquals(new String[]{"hello", "world"}, unit.nextSplit(":"));
         }
     }
 

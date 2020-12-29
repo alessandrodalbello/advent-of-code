@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.adb.adventofcode.Day;
 import org.adb.adventofcode.io.FileResourceReader;
+import org.adb.adventofcode.io.StringReader;
 
 class Day13 implements Day {
 
@@ -17,13 +18,16 @@ class Day13 implements Day {
 
     public Day13() {
         busses = new HashMap<>();
-        try (FileResourceReader reader = new FileResourceReader(INPUT_FILENAME)) {
-            target = reader.nextLong();
-            String[] rawBuses = reader.nextSplit(",");
-            for (int i = 0; i < rawBuses.length; i++) {
-                if (!"x".equals(rawBuses[i])) {
-                    long bus = Long.parseLong(rawBuses[i]);
-                    busses.put(bus, i);
+        try (FileResourceReader fileReader = new FileResourceReader(INPUT_FILENAME)) {
+            target = fileReader.nextLong();
+            String rawBusses = fileReader.nextString();
+            try (StringReader stringReader = new StringReader(rawBusses)) {
+                String[] busses = stringReader.nextSplit(",");
+                for (int i = 0; i < busses.length; i++) {
+                    if (!"x".equals(busses[i])) {
+                        long bus = Long.parseLong(busses[i]);
+                        this.busses.put(bus, i);
+                    }
                 }
             }
         }
